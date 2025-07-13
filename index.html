@@ -3,153 +3,357 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Comandos Termux 1 a 80</title>
+  <title>Controle Financeiro com Importação</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       background: #f0f2f5;
       padding: 20px;
       color: #333;
     }
-    h1, h2 {
-      color: #1a73e8;
+    .container {
+      max-width: 720px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
     }
-    pre {
-      background: #000;
-      color: #0f0;
+    h2, h3 {
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .entrada-bloco {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .entrada-bloco > div {
+      flex: 1 1 48%;
+      min-width: 300px;
+    }
+    .bloco {
+      margin-top: 30px;
+    }
+    #toggle-investimento {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      margin-left: 8px;
+    }
+    textarea {
+      width: 100%;
+      height: 180px;
+      margin-top: 10px;
       padding: 10px;
-      border-radius: 5px;
-      overflow-x: auto;
-    }
-    section {
-      margin-bottom: 40px;
+      font-family: monospace;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      resize: none;
+      white-space: pre-line;
     }
   </style>
 </head>
 <body>
 
-  <h1>📱 Comandos do Termux – Do 1 ao 80</h1>
+<div class="container">
+  <h2>📒 Controle Financeiro com Histórico Organizado e Importação</h2>
 
-  <section>
-    <h2>🔧 1. Gerenciamento de Pacotes</h2>
-    <pre>
-1. pkg update         # Atualiza a lista de pacotes
-2. pkg upgrade        # Atualiza os pacotes instalados
-3. pkg install nome   # Instala um pacote (ex: git, python)
-4. pkg uninstall nome # Remove um pacote instalado
-5. pkg list-installed # Lista os pacotes instalados
-6. pkg search termo   # Busca pacotes por nome
-    </pre>
-  </section>
+  <!-- Entradas com data digitada -->
+  <h3>Entradas com data digitada</h3>
+  <div class="entrada-bloco">
+    <div>
+      <label>📝 Entrada 1 Origem:</label>
+      <input type="text" id="origem1" />
 
-  <section>
-    <h2>📁 2. Arquivos e Diretórios</h2>
-    <pre>
-7. ls               # Lista arquivos e pastas
-8. ls -a            # Inclui arquivos ocultos
-9. ls -lh           # Mostra tamanho dos arquivos
-10. cd pasta/       # Entra em uma pasta
-11. cd ..           # Volta uma pasta
-12. pwd             # Mostra o caminho atual
-13. mkdir nome      # Cria uma nova pasta
-14. rmdir nome      # Remove pasta vazia
-15. rm arquivo      # Remove arquivo
-16. rm -r pasta     # Remove pasta com arquivos
-17. rm -rf pasta    # Remove sem perguntar
-18. cp origem destino # Copia arquivo
-19. mv origem destino # Move ou renomeia
-20. touch arquivo   # Cria um arquivo vazio
-21. cat arquivo     # Mostra conteúdo de um arquivo
-22. head arquivo    # Mostra as primeiras linhas
-23. tail -f arquivo # Mostra conteúdo em tempo real
-24. less arquivo    # Mostra conteúdo com rolagem
-25. more arquivo    # Versão antiga de visualização
-26. nano arquivo    # Editor de texto nano
-    </pre>
-  </section>
+      <label>📅 Data Digitada:</label>
+      <input type="date" id="data1" />
 
-  <section>
-    <h2>⚙️ 3. Sistema e Processos</h2>
-    <pre>
-27. uname -a        # Info do sistema
-28. uptime          # Tempo ligado
-29. whoami          # Usuário atual
-30. history         # Histórico de comandos
-31. top             # Uso da CPU e RAM ao vivo
-32. ps              # Lista de processos
-33. kill PID        # Finaliza processo com ID
-    </pre>
-  </section>
+      <label>💵 Valor (R$):</label>
+      <input type="number" id="valor1" step="0.01" />
+    </div>
 
-  <section>
-    <h2>🌐 4. Rede e Internet</h2>
-    <pre>
-34. termux-setup-storage # Permite acesso ao armazenamento
-35. ifconfig             # Mostra IP interno
-36. ip route             # Mostra gateway/rede
-37. ping site.com        # Testa conexão
-38. curl site.com        # Mostra conteúdo da web
-39. wget link            # Baixa arquivo
-40. nmap IP              # Escaneia portas/dispositivos
-41. netstat -tuln        # Mostra portas abertas
-42. host dominio.com     # Consulta DNS
-43. dig dominio.com      # Consulta DNS (detalhado)
-44. iptables -L          # Mostra firewall (se instalado)
-45. ssh user@ip          # Acessa outro PC via SSH
-    </pre>
-  </section>
+    <div>
+      <label>📝 Entrada 2 Origem:</label>
+      <input type="text" id="origem2" />
 
-  <section>
-    <h2>💻 5. Programação</h2>
-    <pre>
-53. git clone url         # Clona repositório Git
-54. python script.py      # Roda script Python
-55. pip install pacote    # Instala biblioteca Python
-56. node arquivo.js       # Roda script JS (Node.js)
-57. gcc arq.c -o nome     # Compila código em C
-58. vim arquivo           # Editor de texto Vim
-59. emacs arquivo         # Editor Emacs
-    </pre>
-  </section>
+      <label>📅 Data Digitada:</label>
+      <input type="date" id="data2" />
 
-  <section>
-    <h2>🔐 6. Criptografia e Segurança</h2>
-    <pre>
-60. ssh-keygen            # Gera chave SSH
-61. gpg --gen-key         # Gera chave GPG
-62. gpg --encrypt arq     # Criptografa arquivo
-63. gpg --decrypt arq.gpg # Descriptografa
-64. rsync -av origem destino # Sincroniza arquivos
-    </pre>
-  </section>
+      <label>💵 Valor (R$):</label>
+      <input type="number" id="valor2" step="0.01" />
+    </div>
+  </div>
 
-  <section>
-    <h2>📊 7. Outros úteis</h2>
-    <pre>
-65. df -h                 # Espaço no disco
-66. du -h pasta/          # Tamanho de pasta
-67. free -h               # RAM disponível
-68. cal                   # Calendário
-69. date                  # Mostra data/hora
-70. alias l='ls -l'       # Atalho para comando
-71. chmod +x arquivo      # Deixa executável
-72. chmod 777 arquivo     # Permissão total
-73. ln -s alvo nome_link  # Link simbólico
-    </pre>
-  </section>
+  <!-- Botão importar -->
+  <button onclick="document.getElementById('fileInput').click()">📥 Importar Entradas</button>
+  <input type="file" id="fileInput" accept=".json" style="display:none" onchange="importarDados(event)" />
 
-  <section>
-    <h2>📱 8. Comandos Específicos do Termux</h2>
-    <pre>
-74. termux-wake-lock       # Impede o celular de dormir
-75. termux-wake-unlock     # Libera o bloqueio
-76. termux-change-repo     # Muda repositório do Termux
-77. termux-info            # Info do Termux
-78. termux-camera-photo    # Tira foto com câmera
-79. termux-volume music 10 # Define volume
-80. termux-battery-status  # Mostra bateria
-    </pre>
-  </section>
+  <hr style="margin: 30px 0;">
+
+  <!-- Entradas com data programada fixa -->
+  <h3>Entradas com data programada fixa</h3>
+  <div class="entrada-bloco">
+    <div>
+      <label>📝 Entrada 3 Origem:</label>
+      <input type="text" id="origem3" value="Cliente A" />
+
+      <label>💵 Valor (R$):</label>
+      <input type="number" id="valor3" step="0.01" value="300" />
+    </div>
+
+    <div>
+      <label>📝 Entrada 4 Origem:</label>
+      <input type="text" id="origem4" value="Cliente B" />
+
+      <label>💵 Valor (R$):</label>
+      <input type="number" id="valor4" step="0.01" value="300" />
+    </div>
+  </div>
+
+  <button onclick="registrarEntradas()">Registrar Entradas</button>
+
+  <div class="bloco">
+    <h3>💰 Total Atual: <span id="total">R$ 0.00</span></h3>
+    <div class="titulo-divisao">📊 Divisão Atual:</div>
+    <div id="divisao"></div>
+  </div>
+
+  <div class="bloco">
+    <h3>📜 Histórico</h3>
+    <textarea id="historico" readonly></textarea>
+  </div>
+
+  <button onclick="imprimirRelatorio()">🖨️ Imprimir Relatório</button>
+</div>
+
+<script>
+  const datasProgramadas = {
+    3: '2025-07-15',
+    4: '2025-07-20'
+  };
+
+  function formatDataHora(d) {
+    return d.toLocaleDateString() + ' ' + d.toLocaleTimeString();
+  }
+
+  function salvarDadosLocal(total, historico, divisaoHTML) {
+    localStorage.setItem('total', total.toFixed(2));
+    localStorage.setItem('historico', historico);
+    localStorage.setItem('divisao', divisaoHTML);
+  }
+
+  function toggleInvestimento() {
+    const elem = document.getElementById("investimento-valor");
+    if (elem.textContent === "••••••••") {
+      elem.textContent = `R$ ${window.valorInvestimento.toFixed(2)}`;
+    } else {
+      elem.textContent = "••••••••";
+    }
+  }
+
+  function carregarDadosSalvos() {
+    const total = localStorage.getItem('total');
+    const historico = localStorage.getItem('historico');
+
+    if (total) document.getElementById("total").textContent = `R$ ${parseFloat(total).toFixed(2)}`;
+    if (historico) document.getElementById("historico").value = historico;
+
+    if (total) {
+      const totalNum = parseFloat(total);
+      const dizimo = totalNum * 0.10;
+      const contas = totalNum * 0.30;
+      const alimentacao = totalNum * 0.30;
+      const investimento = totalNum * 0.30;
+      window.valorInvestimento = investimento;
+
+      const divisaoHTML = `
+        <ul>
+          <li>🛐 Dízimo (10%): R$ ${dizimo.toFixed(2)}</li>
+          <li>💡 Contas (30%): R$ ${contas.toFixed(2)}</li>
+          <li>🍽️ Alimentação (30%): R$ ${alimentacao.toFixed(2)}</li>
+          <li>📈 Investimento (30%): 
+            <span id="investimento-valor" style="user-select:none;">••••••••</span>
+            <button id="toggle-investimento" aria-label="Mostrar/ocultar investimento">👁️</button>
+          </li>
+        </ul>
+      `;
+
+      document.getElementById("divisao").innerHTML = divisaoHTML;
+      document.getElementById("toggle-investimento").addEventListener('click', toggleInvestimento);
+    }
+  }
+
+  function registrarEntradas() {
+    const hoje = new Date();
+    let total = parseFloat(localStorage.getItem('total')) || 0;
+    let historicoNovo = '';
+
+    for(let i =1; i <=2; i++) {
+      const origem = document.getElementById(`origem${i}`).value.trim();
+      const valor = parseFloat(document.getElementById(`valor${i}`).value);
+      const dataStr = document.getElementById(`data${i}`).value;
+
+      if(!origem || isNaN(valor) || valor <= 0 || !dataStr) continue;
+
+      const dataEntrada = new Date(dataStr);
+      if(dataEntrada <= hoje) {
+        total += valor;
+        historicoNovo += `📅 ${formatDataHora(new Date())}\nCliente: ${origem}\nValor: R$ ${valor.toFixed(2)}\n------------------------------\n`;
+      }
+    }
+
+    for(let i = 3; i <=4; i++) {
+      const origem = document.getElementById(`origem${i}`).value.trim();
+      const valor = parseFloat(document.getElementById(`valor${i}`).value);
+      const dataStr = datasProgramadas[i];
+
+      if(!origem || isNaN(valor) || valor <= 0 || !dataStr) continue;
+
+      const dataEntrada = new Date(dataStr);
+      if(dataEntrada <= hoje) {
+        total += valor;
+        historicoNovo += `📅 ${formatDataHora(new Date())}\nCliente: ${origem}\nValor: R$ ${valor.toFixed(2)}\n------------------------------\n`;
+      }
+    }
+
+    document.getElementById("total").textContent = `R$ ${total.toFixed(2)}`;
+
+    const dizimo = total * 0.10;
+    const contas = total * 0.30;
+    const alimentacao = total * 0.30;
+    const investimento = total * 0.30;
+
+    window.valorInvestimento = investimento;
+
+    const divisaoHTML = `
+      <ul>
+        <li>🛐 Dízimo (10%): R$ ${dizimo.toFixed(2)}</li>
+        <li>💡 Contas (30%): R$ ${contas.toFixed(2)}</li>
+        <li>🍽️ Alimentação (30%): R$ ${alimentacao.toFixed(2)}</li>
+        <li>📈 Investimento (30%): 
+          <span id="investimento-valor" style="user-select:none;">••••••••</span>
+          <button id="toggle-investimento" aria-label="Mostrar/ocultar investimento">👁️</button>
+        </li>
+      </ul>
+    `;
+
+    document.getElementById("divisao").innerHTML = divisaoHTML;
+    document.getElementById("toggle-investimento").addEventListener('click', toggleInvestimento);
+
+    document.getElementById("historico").value += historicoNovo;
+
+    salvarDadosLocal(total, document.getElementById("historico").value, divisaoHTML);
+  }
+
+  function importarDados(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      try {
+        const dados = JSON.parse(e.target.result);
+
+        if (dados.entradas && dados.entradas.length >= 2) {
+          document.getElementById("origem1").value = dados.entradas[0].origem || "";
+          document.getElementById("data1").value = dados.entradas[0].data || "";
+          document.getElementById("valor1").value = dados.entradas[0].valor || "";
+
+          document.getElementById("origem2").value = dados.entradas[1].origem || "";
+          document.getElementById("data2").value = dados.entradas[1].data || "";
+          document.getElementById("valor2").value = dados.entradas[1].valor || "";
+
+          alert("✅ Entradas importadas com sucesso!");
+        } else {
+          alert("⚠️ O arquivo precisa ter pelo menos duas entradas.");
+        }
+
+      } catch (err) {
+        alert("❌ Erro ao importar o arquivo. Verifique se é um JSON válido.");
+      }
+    };
+
+    reader.readAsText(file);
+  }
+
+  function imprimirRelatorio() {
+    const total = document.getElementById("total").textContent;
+    const divisao = document.getElementById("divisao").innerHTML;
+    const historico = document.getElementById("historico").value.replace(/\n/g, "<br>");
+
+    const htmlRelatorio = `
+      <html>
+      <head>
+        <title>Relatório Financeiro</title>
+        <style>
+          body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; color: #333; }
+          h2, h3 { text-align: center; }
+          hr { margin: 20px 0; }
+          .section { margin-bottom: 20px; }
+          ul { list-style: none; padding-left: 0; }
+          ul li { margin: 5px 0; font-size: 1.1em; }
+          .historico { white-space: pre-wrap; border: 1px solid #ccc; padding: 15px; border-radius: 8px; background: #fafafa; }
+        </style>
+      </head>
+      <body>
+        <h2>📒 Relatório Financeiro</h2>
+        <hr>
+        <div class="section">
+          <h3>Total Atual</h3>
+          <p style="font-size: 1.4em; font-weight: bold;">${total}</p>
+        </div>
+        <div class="section">
+          <h3>Divisão Atual</h3>
+          ${divisao}
+        </div>
+        <div class="section">
+          <h3>Histórico</h3>
+          <div class="historico">${historico}</div>
+        </div>
+        <script>
+          window.onload = function() {
+            window.print();
+            setTimeout(() => window.close(), 100);
+          }
+        <\/script>
+      </body>
+      </html>
+    `;
+
+    const novaJanela = window.open('', '', 'width=800,height=600');
+    novaJanela.document.write(htmlRelatorio);
+    novaJanela.document.close();
+  }
+
+  window.onload = carregarDadosSalvos;
+</script>
 
 </body>
 </html>
