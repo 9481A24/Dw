@@ -1,148 +1,168 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>Controle Financeiro com Importação</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f0f2f5;
-      padding: 20px;
-      color: #333;
-    }
-    .container {
-      max-width: 720px;
-      margin: auto;
-      background: #fff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    }
-    h2, h3 {
-      text-align: center;
-    }
-    label {
-      display: block;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-    input {
-      width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-    button {
-      width: 100%;
-      margin-top: 20px;
-      padding: 12px;
-      font-size: 16px;
-      border-radius: 8px;
-      border: none;
-      background-color: #007bff;
-      color: white;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    .entrada-bloco {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-    .entrada-bloco > div {
-      flex: 1 1 48%;
-      min-width: 300px;
-    }
-    .bloco {
-      margin-top: 30px;
-    }
-    #toggle-investimento {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 18px;
-      margin-left: 8px;
-    }
-    textarea {
-      width: 100%;
-      height: 180px;
-      margin-top: 10px;
-      padding: 10px;
-      font-family: monospace;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      resize: none;
-      white-space: pre-line;
-    }
-  </style>
+<meta charset="UTF-8" />
+<title>Controle Financeiro com Histórico Organizado</title>
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f0f2f5;
+    padding: 20px;
+    color: #333;
+  }
+  .container {
+    max-width: 720px;
+    margin: auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  }
+  h2, h3 {
+    text-align: center;
+  }
+  label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+  }
+  input, button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color .3s;
+  }
+  button:hover {
+    background-color: #218838;
+  }
+  textarea {
+    width: 100%;
+    height: 180px;
+    margin-top: 10px;
+    padding: 10px;
+    font-family: monospace;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    resize: none;
+    white-space: pre-line;
+  }
+  .entrada-bloco {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  .entrada-bloco > div {
+    flex: 1 1 48%;
+    min-width: 300px;
+  }
+  .divisao-container {
+    max-width: 400px;
+    margin: 20px auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .linha {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 1.1em;
+  }
+  .valor {
+    min-width: 100px;
+    text-align: right;
+    white-space: nowrap;
+  }
+  button.olho-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin-left: 8px;
+    user-select: none;
+  }
+</style>
 </head>
 <body>
 
 <div class="container">
-  <h2>📒 Controle Financeiro com Histórico Organizado e Importação</h2>
+  <h2>📒 Controle Financeiro com Histórico Organizado</h2>
 
-  <!-- Entradas com data digitada -->
-  <h3>Entradas com data digitada</h3>
+  <h3>Entradas com data digitada (Altere no formulário)</h3>
   <div class="entrada-bloco">
     <div>
       <label>📝 Entrada 1 Origem:</label>
-      <input type="text" id="origem1" />
-
+      <input type="text" id="origem1" value="Cliente X" />
       <label>📅 Data Digitada:</label>
       <input type="date" id="data1" />
-
       <label>💵 Valor (R$):</label>
-      <input type="number" id="valor1" step="0.01" />
+      <input type="number" id="valor1" step="0.01" value="200" />
     </div>
-
     <div>
       <label>📝 Entrada 2 Origem:</label>
-      <input type="text" id="origem2" />
-
+      <input type="text" id="origem2" value="Cliente Y" />
       <label>📅 Data Digitada:</label>
       <input type="date" id="data2" />
-
       <label>💵 Valor (R$):</label>
-      <input type="number" id="valor2" step="0.01" />
+      <input type="number" id="valor2" step="0.01" value="350" />
     </div>
   </div>
 
-  <!-- Botão importar -->
-  <button onclick="document.getElementById('fileInput').click()">📥 Importar Entradas</button>
-  <input type="file" id="fileInput" accept=".json" style="display:none" onchange="importarDados(event)" />
-
-  <hr style="margin: 30px 0;">
-
-  <!-- Entradas com data programada fixa -->
-  <h3>Entradas com data programada fixa</h3>
+  <h3>Entradas com data programada fixa (Altere datas no código)</h3>
   <div class="entrada-bloco">
     <div>
       <label>📝 Entrada 3 Origem:</label>
       <input type="text" id="origem3" value="Cliente A" />
-
       <label>💵 Valor (R$):</label>
       <input type="number" id="valor3" step="0.01" value="300" />
     </div>
-
     <div>
       <label>📝 Entrada 4 Origem:</label>
       <input type="text" id="origem4" value="Cliente B" />
-
       <label>💵 Valor (R$):</label>
       <input type="number" id="valor4" step="0.01" value="300" />
     </div>
   </div>
 
+  <!-- Botão e input arquivo para importar CSV -->
+  <label for="arquivoCSV" style="margin-top:20px; font-weight:bold;">📁 Importar Entradas CSV:</label>
+  <input type="file" id="arquivoCSV" accept=".csv" />
+
   <button onclick="registrarEntradas()">Registrar Entradas</button>
 
   <div class="bloco">
-    <h3>💰 Total Atual: <span id="total">R$ 0.00</span></h3>
-    <div class="titulo-divisao">📊 Divisão Atual:</div>
-    <div id="divisao"></div>
+    <h3>💰 Total Atual: <span id="total">R$ 0,00</span></h3>
+  </div>
+
+  <div class="divisao-container" id="divisao-financeira">
+    <div class="linha">
+      <span>🛐 Dízimo (10%):</span>
+      <strong class="valor" id="dizimo-valor">R$ 0,00</strong>
+    </div>
+    <div class="linha">
+      <span>💡 Contas (30%):</span>
+      <strong class="valor" id="contas-valor">R$ 0,00</strong>
+    </div>
+    <div class="linha">
+      <span>🍽️ Alimentação (30%):</span>
+      <strong class="valor" id="alimentacao-valor">R$ 0,00</strong>
+    </div>
+    <div class="linha">
+      <span>📈 Investimento (30%):</span>
+      <span class="valor">
+        <strong id="investimento-valor" style="user-select:none;">••••••••</strong>
+        <button class="olho-btn" id="toggle-investimento" aria-label="Mostrar/ocultar investimento">👁️</button>
+      </span>
+    </div>
   </div>
 
   <div class="bloco">
@@ -151,6 +171,7 @@
   </div>
 
   <button onclick="imprimirRelatorio()">🖨️ Imprimir Relatório</button>
+
 </div>
 
 <script>
@@ -159,153 +180,131 @@
     4: '2025-07-20'
   };
 
+  let dizimoValor = 0;
+  let contasValor = 0;
+  let alimentacaoValor = 0;
+  let investimentoValor = 0;
+
+  const dizimoElem = document.getElementById('dizimo-valor');
+  const contasElem = document.getElementById('contas-valor');
+  const alimentacaoElem = document.getElementById('alimentacao-valor');
+  const investimentoElem = document.getElementById('investimento-valor');
+  const toggleInvestimentoBtn = document.getElementById('toggle-investimento');
+
   function formatDataHora(d) {
     return d.toLocaleDateString() + ' ' + d.toLocaleTimeString();
   }
 
-  function salvarDadosLocal(total, historico, divisaoHTML) {
+  function salvarDadosLocal(total, historico) {
     localStorage.setItem('total', total.toFixed(2));
     localStorage.setItem('historico', historico);
-    localStorage.setItem('divisao', divisaoHTML);
-  }
-
-  function toggleInvestimento() {
-    const elem = document.getElementById("investimento-valor");
-    if (elem.textContent === "••••••••") {
-      elem.textContent = `R$ ${window.valorInvestimento.toFixed(2)}`;
-    } else {
-      elem.textContent = "••••••••";
-    }
   }
 
   function carregarDadosSalvos() {
     const total = localStorage.getItem('total');
     const historico = localStorage.getItem('historico');
 
-    if (total) document.getElementById("total").textContent = `R$ ${parseFloat(total).toFixed(2)}`;
-    if (historico) document.getElementById("historico").value = historico;
-
     if (total) {
       const totalNum = parseFloat(total);
-      const dizimo = totalNum * 0.10;
-      const contas = totalNum * 0.30;
-      const alimentacao = totalNum * 0.30;
-      const investimento = totalNum * 0.30;
-      window.valorInvestimento = investimento;
+      atualizarDivisaoFinanceira(totalNum);
+      document.getElementById("total").textContent = `R$ ${totalNum.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+    }
 
-      const divisaoHTML = `
-        <ul>
-          <li>🛐 Dízimo (10%): R$ ${dizimo.toFixed(2)}</li>
-          <li>💡 Contas (30%): R$ ${contas.toFixed(2)}</li>
-          <li>🍽️ Alimentação (30%): R$ ${alimentacao.toFixed(2)}</li>
-          <li>📈 Investimento (30%): 
-            <span id="investimento-valor" style="user-select:none;">••••••••</span>
-            <button id="toggle-investimento" aria-label="Mostrar/ocultar investimento">👁️</button>
-          </li>
-        </ul>
-      `;
-
-      document.getElementById("divisao").innerHTML = divisaoHTML;
-      document.getElementById("toggle-investimento").addEventListener('click', toggleInvestimento);
+    if (historico) {
+      document.getElementById("historico").value = historico;
     }
   }
+
+  function atualizarDivisaoFinanceira(total) {
+    dizimoValor = total * 0.10;
+    contasValor = total * 0.30;
+    alimentacaoValor = total * 0.30;
+    investimentoValor = total * 0.30;
+
+    dizimoElem.textContent = `R$ ${dizimoValor.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    contasElem.textContent = `R$ ${contasValor.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    alimentacaoElem.textContent = `R$ ${alimentacaoValor.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    investimentoElem.textContent = "••••••••";
+  }
+
+  toggleInvestimentoBtn.addEventListener('click', () => {
+    if (investimentoElem.textContent === "••••••••") {
+      investimentoElem.textContent = `R$ ${investimentoValor.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    } else {
+      investimentoElem.textContent = "••••••••";
+    }
+  });
+
+  // Função para importar CSV e preencher os primeiros 2 campos de entrada digitada
+  document.getElementById('arquivoCSV').addEventListener('change', function(event){
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e){
+      const texto = e.target.result;
+      const linhas = texto.trim().split(/\r?\n/);
+      // Espera CSV: origem,data,valor nas colunas
+      for(let i=0; i<2; i++){
+        if(i >= linhas.length) break;
+        const colunas = linhas[i].split(',');
+        if(colunas.length < 3) continue;
+
+        // Preenche os campos: origem, data, valor
+        document.getElementById(`origem${i+1}`).value = colunas[0].trim();
+        document.getElementById(`data${i+1}`).value = colunas[1].trim();
+        document.getElementById(`valor${i+1}`).value = parseFloat(colunas[2].trim());
+      }
+    }
+    reader.readAsText(file);
+  });
 
   function registrarEntradas() {
     const hoje = new Date();
     let total = parseFloat(localStorage.getItem('total')) || 0;
     let historicoNovo = '';
 
-    for(let i =1; i <=2; i++) {
+    for(let i = 1; i <= 2; i++) {
       const origem = document.getElementById(`origem${i}`).value.trim();
       const valor = parseFloat(document.getElementById(`valor${i}`).value);
       const dataStr = document.getElementById(`data${i}`).value;
 
-      if(!origem || isNaN(valor) || valor <= 0 || !dataStr) continue;
+      if (!origem || isNaN(valor) || valor <= 0 || !dataStr) continue;
 
       const dataEntrada = new Date(dataStr);
-      if(dataEntrada <= hoje) {
+      if (dataEntrada <= hoje) {
         total += valor;
         historicoNovo += `📅 ${formatDataHora(new Date())}\nCliente: ${origem}\nValor: R$ ${valor.toFixed(2)}\n------------------------------\n`;
       }
     }
 
-    for(let i = 3; i <=4; i++) {
+    for(let i = 3; i <= 4; i++) {
       const origem = document.getElementById(`origem${i}`).value.trim();
       const valor = parseFloat(document.getElementById(`valor${i}`).value);
       const dataStr = datasProgramadas[i];
 
-      if(!origem || isNaN(valor) || valor <= 0 || !dataStr) continue;
+      if (!origem || isNaN(valor) || valor <= 0 || !dataStr) continue;
 
       const dataEntrada = new Date(dataStr);
-      if(dataEntrada <= hoje) {
+      if (dataEntrada <= hoje) {
         total += valor;
         historicoNovo += `📅 ${formatDataHora(new Date())}\nCliente: ${origem}\nValor: R$ ${valor.toFixed(2)}\n------------------------------\n`;
       }
     }
 
-    document.getElementById("total").textContent = `R$ ${total.toFixed(2)}`;
-
-    const dizimo = total * 0.10;
-    const contas = total * 0.30;
-    const alimentacao = total * 0.30;
-    const investimento = total * 0.30;
-
-    window.valorInvestimento = investimento;
-
-    const divisaoHTML = `
-      <ul>
-        <li>🛐 Dízimo (10%): R$ ${dizimo.toFixed(2)}</li>
-        <li>💡 Contas (30%): R$ ${contas.toFixed(2)}</li>
-        <li>🍽️ Alimentação (30%): R$ ${alimentacao.toFixed(2)}</li>
-        <li>📈 Investimento (30%): 
-          <span id="investimento-valor" style="user-select:none;">••••••••</span>
-          <button id="toggle-investimento" aria-label="Mostrar/ocultar investimento">👁️</button>
-        </li>
-      </ul>
-    `;
-
-    document.getElementById("divisao").innerHTML = divisaoHTML;
-    document.getElementById("toggle-investimento").addEventListener('click', toggleInvestimento);
-
+    document.getElementById("total").textContent = `R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    atualizarDivisaoFinanceira(total);
     document.getElementById("historico").value += historicoNovo;
 
-    salvarDadosLocal(total, document.getElementById("historico").value, divisaoHTML);
-  }
-
-  function importarDados(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      try {
-        const dados = JSON.parse(e.target.result);
-
-        if (dados.entradas && dados.entradas.length >= 2) {
-          document.getElementById("origem1").value = dados.entradas[0].origem || "";
-          document.getElementById("data1").value = dados.entradas[0].data || "";
-          document.getElementById("valor1").value = dados.entradas[0].valor || "";
-
-          document.getElementById("origem2").value = dados.entradas[1].origem || "";
-          document.getElementById("data2").value = dados.entradas[1].data || "";
-          document.getElementById("valor2").value = dados.entradas[1].valor || "";
-
-          alert("✅ Entradas importadas com sucesso!");
-        } else {
-          alert("⚠️ O arquivo precisa ter pelo menos duas entradas.");
-        }
-
-      } catch (err) {
-        alert("❌ Erro ao importar o arquivo. Verifique se é um JSON válido.");
-      }
-    };
-
-    reader.readAsText(file);
+    salvarDadosLocal(total, document.getElementById("historico").value);
   }
 
   function imprimirRelatorio() {
     const total = document.getElementById("total").textContent;
-    const divisao = document.getElementById("divisao").innerHTML;
+    const dizimo = dizimoElem.textContent;
+    const contas = contasElem.textContent;
+    const alimentacao = alimentacaoElem.textContent;
+    const investimento = investimentoElem.textContent;
     const historico = document.getElementById("historico").value.replace(/\n/g, "<br>");
 
     const htmlRelatorio = `
@@ -331,7 +330,12 @@
         </div>
         <div class="section">
           <h3>Divisão Atual</h3>
-          ${divisao}
+          <ul>
+            <li>🛐 Dízimo (10%): ${dizimo}</li>
+            <li>💡 Contas (30%): ${contas}</li>
+            <li>🍽️ Alimentação (30%): ${alimentacao}</li>
+            <li>📈 Investimento (30%): ${investimento}</li>
+          </ul>
         </div>
         <div class="section">
           <h3>Histórico</h3>
@@ -357,3 +361,5 @@
 
 </body>
 </html>
+
+    
